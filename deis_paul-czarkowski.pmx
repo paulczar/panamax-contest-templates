@@ -1,0 +1,39 @@
+---
+name: DEIS
+description: A template for DEIS
+keywords: ''
+type: Default
+documentation: |+
+  # Jenkins Latest
+
+  Deploys the latest [Jenkins](http://jenkins-ci.org/) server.
+
+  ## System Requirements
+
+  Recommended: 2 Cores, 2GB of RAM
+
+  ## Port-Forwarding
+
+  If using Virtual Box, use the following command in your local machine's terminal window to create the port forwarding rule:
+
+  `VBoxManage controlvm panamax-vm natpf1 jenkins-8080,tcp,,8080,,8080`
+
+  Then go to http://localhost:8080 to see the Jenkins dashboard.
+
+  ## Setup
+
+  Once you are able to see the Jenkins dashboard, immediately run through the Jenkins [Standard Security Setup](https://wiki.jenkins-ci.org/display/JENKINS/Standard+Security+Setup)
+
+images:
+- name: paulczar_deis-install
+  source: paulczar/deis-install:latest
+  category: PAAS
+  type: Default
+  ports:
+  - host_port: '80'
+    container_port: '80'
+    proto: TCP
+  environment:
+    - variable: DEIS_HOST
+    - value: 10.0.2.15
+
